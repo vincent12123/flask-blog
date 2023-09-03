@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>New Post</h1>
-    <form method="post">
+    <form method="post" id="postForm">
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{ form.title.label(class="form-control-label") }}
@@ -9,10 +9,30 @@
         </div>
         <div class="form-group">
             {{ form.content.label(class="form-control-label") }}
-            {{ form.content(class="form-control") }}
+            <div id="editor"></div> <!-- Kontainer untuk Toast UI Editor -->
         </div>
         <div class="form-group">
-            {{ form.submit(class="btn btn-primary") }}
+            <button type="button" id="submitBtn" class="btn btn-primary">Post</button>
         </div>
     </form>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <script>
+        var editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            height: '300px',
+            initialEditType: 'markdown',
+            previewStyle: 'vertical'
+        });
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            var markdownContent = editor.getMarkdown();
+            var form = document.getElementById('postForm');
+            var textArea = document.createElement('textarea');
+            textArea.name = 'content';
+            textArea.style.display = 'none';
+            textArea.value = markdownContent;
+            form.appendChild(textArea);
+            form.submit();
+        });
+    </script>
 {% endblock %}
