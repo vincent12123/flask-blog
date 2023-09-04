@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css" />
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
+</head>
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-header">
+              <h1>  {{ post.title }} </h1>
+            </div>
+            <div class="card-body">
+                <div id="viewer"></div>
+                <script>
+                    const postContent = {{ post.content|tojson }};
+                    const viewer = new toastui.Editor({
+                        el: document.querySelector('#viewer'),
+                        initialValue: postContent,
+                        viewer: true  // set it as a viewer
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
