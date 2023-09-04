@@ -8,28 +8,10 @@
     <!-- Toast UI Editor CSS -->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css" />
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />   
-    <style>
-        body {
-            background-color: #121212;  /* Warna latar belakang untuk dark mode */
-            color: #ffffff;  /* Warna teks untuk dark mode */
-        }
+    <!-- Link ke file style.css yang berada di folder static/css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     
-        /* Atur warna latar belakang dan teks untuk navbar */
-        .navbar {
-            background-color: #1f1f1f;  /* Warna latar belakang navbar */
-        }
-    
-        .navbar .navbar-brand,
-        .navbar .nav-link {
-            color: #ffffff;  /* Warna teks navbar */
-        }
-    
-        /* Atur warna latar belakang dan teks untuk konten */
-        .container {
-            background-color: #121212;
-            color: #ffffff;
-        }
-    </style>
     
     <title>My Blog</title>
 </head>
