@@ -728,3 +728,31 @@ Buat folder `templates` didalam folder `app` kemudian buat file dengan nama `bas
 </form>
 
 ```
+## Buat `sidebar.html` dalam folder `templates`
+```html
+
+{% block sidebar %}
+<div id="sidebar">
+    <a class="menu-item" href="#">
+        <i class="fa-solid fa-home"></i>
+        <div>HOME</div>
+    </a>
+    <a class="menu-item" href="#">
+        <i class="fa-solid fa-newspaper"></i>
+        <div>NEWS</div>
+    </a>
+    <a class="menu-item" href="/unit">
+        <i class="fa-solid fa-school"></i>
+        <div>UNITS</div>
+    </a>
+    <a class="menu-item" href="{{ url_for('logout')}}">
+        <i class="fa-solid fa-sign-out-alt"></i>
+        <div>LOGOFF</div>
+    </a>
+    <a class="menu-item" href="https://wa.me/6281522737386" target="_blank">
+        <i class="fa-solid fa-message"></i>
+        <div>CHAT</div>
+    </a>
+</div>
+{% endblock sidebar %}
+```
