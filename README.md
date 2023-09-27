@@ -437,3 +437,294 @@ Buat folder `templates` didalam folder `app` kemudian buat file dengan nama `bas
 	    </section>
  {% endblock content %}
 ```
+## Buat `login.html` dalam folder `templates`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Optional: You can also include Bootstrap Icons via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <!-- Section: Design Block -->
+    <section class="text-center text-lg-start">
+      <style>
+        /* Efek bayangan dan 3D pada judul */
+        h2.fw-bold {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+          
+          border-radius: 5px;
+          padding: 10px 20px;
+          
+        }
+
+        .card {
+          animation: fadeIn 1s ease-in-out; /* Menggunakan animasi fadeIn pada elemen card */
+        }
+      
+        body {
+          background-color: gray;
+        }
+      
+        .cascading-right {
+          margin-right: -50px;
+        }
+      
+        @media (max-width: 991.98px) {
+          .cascading-right {
+            margin-right: 0;
+          }
+        }
+      
+        /* Tombol Login */
+        .btn-login {
+          background-color: #007bff;
+          background-image: linear-gradient(to bottom, #007bff, #0056b3);
+          border: none;
+          color: #fff;
+          transition: background-color 0.3s ease;
+        }
+      
+        .btn-login:hover {
+          background-color: #0056b3;
+        }
+      
+        /* Tombol Register */
+        .btn-register {
+          background-color: #28a745;
+          background-image: linear-gradient(to bottom, #28a745, #1e7e34);
+          border: none;
+          color: #fff;
+          transition: background-color 0.3s ease;
+        }
+      
+        .btn-register:hover {
+          background-color: #1e7e34;
+        }
+      </style>
+      
+
+        <!-- Jumbotron -->
+        <div class="container py-4">
+            <div class="row g-0 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card cascading-right" style="
+                        background: hsla(0, 0%, 100%, 0.55);
+                        backdrop-filter: blur(30px);
+                    ">
+                        <div class="card-body p-5 shadow-5 text-center">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            <div class="flash-messages">
+                                {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            {% endwith %}
+                            <h2 class="fw-bold mb-5"><span class="typed-text"></span></h2>
+                            <form method="post">
+                                <!-- Username input -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        placeholder="Username" required>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password" required>
+                                </div>
+                               
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="button" class="btn  btn-register" onclick="window.location.href = '{{ url_for('register') }}'">Register</button>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="{{url_for('static', filename='img/004.png')}}"
+                        class="w-100 rounded-4 shadow-4" alt="" />
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+    </section>
+    <!-- Section: Design Block -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+<script>
+  var messages = [
+      {% for message in messages %}
+          "{{ message.message }}",
+      {% endfor %}
+  ];
+
+  var typed = new Typed('.typed-text', {
+      strings: messages,
+      typeSpeed: 250,
+      backSpeed: 50,
+      loop: true
+  });
+</script>
+</body>
+</html>
+
+```
+## Buat `basedashboard.html` dalam folder `templates`
+```html
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}ayama{% endblock title %}</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Bootstrap CSS v5.2.1 -->
+ 
+  <link href="{{ url_for('static', filename='css/cosmo.min.css') }}" rel="stylesheet"/>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+</head>
+
+<body>
+  <header>
+   
+        <nav class="navbar navbar-expand-lg px-3 pe-lg-5 half-trans" id="main_menu">
+            <a href="/home">
+                <img class="img-fluid" src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Website"/>
+    
+            
+            <div class="collapse navbar-collapse flex-grow-0 ms-auto" id="navbar_collapse_01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link link-primary" href="#" target="_blank">
+                            <strong>Beranda</strong>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-primary" href="#">
+                            <strong>Game</strong>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-primary" href="#">
+                            <strong>Komunitas</strong>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-primary" href="#">
+                            <strong>Berita</strong>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-primary" href="#">
+                            <strong>Kontak</strong>
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
+        </nav><!-- place navbar here -->
+  </header>
+  <main>
+    
+    <div id="container">
+      
+     {% block content %}{% endblock content %}  
+    </div>
+</main>
+{% include "sidebar.html" %}
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+  <script>
+    var messages = [
+        {% for message in messages %}
+            "{{ message.message }}",
+        {% endfor %}
+    ];
+
+    var typed = new Typed('.typed-text', {
+        strings: messages,
+        typeSpeed: 250,
+        backSpeed: 50,
+        loop: true
+    });
+</script>
+</body>
+
+</html>
+```
+## Buat `index.html` dalam folder `templates`
+```html
+{% extends "basedashboard.html" %}
+
+{% block title %}Typed{% endblock %}
+
+{% block content %}
+        <div class="px-5 pt-5 pb-4">
+            <h3 class="text-primary text-center fw-700">Motto Kami</h3>
+            <h4 class="text-info text-center mb-0"><em>"Smart, Wise, Accountable"</em></h4>
+        </div>
+        <div class="container mt-5">
+            
+            <h1 class="mb-5"><span class="typed-text"></span></h1>
+
+            <!-- Form untuk menambahkan pesan baru -->
+            <form action="/create" method="post" class="mb-5">
+                <div class="input-group">
+                    <input type="text" name="new_message" class="form-control" placeholder="Enter new message">
+                    <button class="btn btn-primary" type="submit">Add Message</button>
+                </div>
+            </form>
+
+            <!-- Daftar pesan dan tombol untuk menghapus -->
+            <ul class="list-group">
+                {% for message in messages %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ message.message }}
+                        <form action="/delete/{{ message.id }}" method="post" style="display: inline;">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            
+    {% endblock content %}
+
+
+```
+## Buat `register.html` dalam folder `templates`
+```html
+
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Register</button>
+</form>
+
+```
